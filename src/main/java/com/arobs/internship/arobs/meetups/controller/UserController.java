@@ -1,6 +1,7 @@
 package com.arobs.internship.arobs.meetups.controller;
 
 import com.arobs.internship.arobs.meetups.entity.User;
+import com.arobs.internship.arobs.meetups.service.user.UserDTO;
 import com.arobs.internship.arobs.meetups.service.user.UserService;
 import com.arobs.internship.arobs.meetups.service.user.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +19,12 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public User create(@RequestBody User user){
-        return userService.addUser(user);
+    public void create(@RequestBody UserDTO userDTO){
+        userService.addUser(userDTO);
     }
 
     @GetMapping("/Show_all_users")
-    public List<User> getAllPositions(){
+    public List<UserDTO> getAllUsers(){
         return userService.getAllUsers();
     }
 

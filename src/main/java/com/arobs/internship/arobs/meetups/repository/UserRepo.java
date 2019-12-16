@@ -1,5 +1,6 @@
 package com.arobs.internship.arobs.meetups.repository;
 
+import com.arobs.internship.arobs.meetups.configuration.DataBaseConnection;
 import com.arobs.internship.arobs.meetups.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -14,7 +15,8 @@ import java.util.List;
 @Repository
 public class UserRepo {
 
-    @Autowired DataBaseConnection dataBaseConnection;
+    @Autowired
+    DataBaseConnection dataBaseConnection;
     public void addUser(User user) {
 
         String sql = " Insert into users (firstName,lastName,password,role,email,points)"

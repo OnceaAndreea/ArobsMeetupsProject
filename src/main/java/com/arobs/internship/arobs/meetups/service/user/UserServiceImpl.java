@@ -12,13 +12,12 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public User addUser(User user) {
-        userObject.addUser(user);
-        return user;
+    public void addUser(UserDTO userDTO) {
+        userObject.addUser(userDTO);
     }
 
     @Override
-    public List<User> getAllUsers() {
+    public List<UserDTO> getAllUsers() {
         return userObject.getAllUsers();
     }
 }

@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface ProposalService {
 
-    public Proposal addProposal(Proposal proposal);
+    public void addProposal(ProposalDTO proposalDTO);
 
-    public List<Proposal> getAllProposals();
+    public List<ProposalDTO> getAllProposals(int userId);
 }
 

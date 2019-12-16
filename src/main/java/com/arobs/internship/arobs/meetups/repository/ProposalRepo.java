@@ -1,7 +1,7 @@
 package com.arobs.internship.arobs.meetups.repository;
 
+import com.arobs.internship.arobs.meetups.configuration.DataBaseConnection;
 import com.arobs.internship.arobs.meetups.entity.Proposal;
-import com.arobs.internship.arobs.meetups.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -30,10 +30,10 @@ public class ProposalRepo {
             pst.setString(2, proposal.getTitle());
             pst.setString(3, proposal.getDescription());
             pst.setString(4, proposal.getType());
-            pst.setString(4, proposal.getDifficulty());
-            pst.setString(4, proposal.getLanguage());
-            pst.setInt(4, proposal.getDuration());
-            pst.setInt(4, proposal.getmaxAtendees());
+            pst.setString(5, proposal.getDifficulty());
+            pst.setString(6, proposal.getLanguage());
+            pst.setInt(7, proposal.getDuration());
+            pst.setInt(8, proposal.getmaxAtendees());
 
             pst.execute();
 
@@ -48,7 +48,6 @@ public class ProposalRepo {
 
             String sql = "select * from proposals" +
                     " where userId='" + userId + "' ";
-
 
             try (Connection con = dataBaseConnection.getDs().getConnection()) {
                 PreparedStatement pst = con.prepareStatement(sql);

@@ -12,13 +12,22 @@ public class UserObject {
 
     @Autowired
     UserRepo userRepo;
+    @Autowired
+    UserMapper userMapper;
 
-    public void addUser(User user){
+    //receive DTO
+    public void addUser(UserDTO userDTO){
+        User user=userMapper.map(userDTO,User.class);
         userRepo.addUser(user);
     }
 
-    public List<User> getAllUsers(){
-       return userRepo.getAllUsers();
+    //send DTOs
+    public List<UserDTO> getAllUsers(){
+        List<User>users=userRepo.getAllUsers();
+        if (users!=null){
+            return userMapper.mapAsList(users, UserDTO.class);
+        }
+        return null;
     }
 
 }

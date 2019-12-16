@@ -1,14 +1,22 @@
 package com.arobs.internship.arobs.meetups.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @JsonFormat
 @Entity
 public class Proposal {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(hidden = true)
     private int proposalId;
+
     private int userId;
     private String title;
     private String description;

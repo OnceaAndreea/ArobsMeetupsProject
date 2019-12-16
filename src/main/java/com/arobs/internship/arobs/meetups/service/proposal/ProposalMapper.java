@@ -1,6 +1,6 @@
-package com.arobs.internship.arobs.meetups.service.user;
+package com.arobs.internship.arobs.meetups.service.proposal;
 
-import com.arobs.internship.arobs.meetups.entity.User;
+import com.arobs.internship.arobs.meetups.entity.Proposal;
 import ma.glasnost.orika.Mapper;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.ConfigurableMapper;
@@ -8,17 +8,15 @@ import ma.glasnost.orika.impl.generator.specification.Convert;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
-@Component
-public class UserMapper extends ConfigurableMapper implements ApplicationContextAware {
+public class ProposalMapper extends ConfigurableMapper implements ApplicationContextAware {
 
     private ApplicationContext applicationContext;
     private MapperFactory mapperFactory;
 
-    public UserMapper() {
+    public ProposalMapper() {
         super(false);
     }
 
@@ -27,7 +25,7 @@ public class UserMapper extends ConfigurableMapper implements ApplicationContext
         this.mapperFactory = factory;
         addAllMapperBeans(applicationContext);
 
-        mapperFactory.classMap(User.class, UserDTO.class).byDefault().register();
+        mapperFactory.classMap(Proposal.class, ProposalDTO.class).byDefault().register();
 
     }
 
@@ -39,7 +37,7 @@ public class UserMapper extends ConfigurableMapper implements ApplicationContext
 
         //get all converters from context
         Map<String, Convert> beansOfType = applicationContext.getBeansOfType(Convert.class);
-         //mapperFactory.getConverterFactory().registerConverter();
+        //mapperFactory.getConverterFactory().registerConverter();
     }
 
     @Override
@@ -48,5 +46,3 @@ public class UserMapper extends ConfigurableMapper implements ApplicationContext
         init();
     }
 }
-
-

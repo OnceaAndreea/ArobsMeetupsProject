@@ -1,12 +1,14 @@
-package com.arobs.internship.arobs.meetups.repository;
+package com.arobs.internship.arobs.meetups.configuration;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
+@Component
 public class DataBaseConnection {
 
     private static HikariConfig config = new HikariConfig();

@@ -1,4 +1,4 @@
-package com.arobs.internship.arobs.meetups.service;
+package com.arobs.internship.arobs.meetups.service.user;
 
 import com.arobs.internship.arobs.meetups.entity.User;
 import com.arobs.internship.arobs.meetups.repository.UserRepo;

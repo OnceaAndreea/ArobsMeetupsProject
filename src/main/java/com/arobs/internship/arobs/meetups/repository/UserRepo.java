@@ -43,7 +43,7 @@ public class UserRepo {
 
         String sql = "Select * from users";
 
-        try (Connection con = DataBaseConnection.getConnection()) {
+        try (Connection con = dataBaseConnection.getDs().getConnection()) {
             PreparedStatement pst = con.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
 

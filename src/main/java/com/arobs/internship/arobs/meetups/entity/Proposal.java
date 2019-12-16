@@ -2,7 +2,10 @@ package com.arobs.internship.arobs.meetups.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import javax.persistence.Entity;
+
 @JsonFormat
+@Entity
 public class Proposal {
 
     private int proposalId;
@@ -14,23 +17,17 @@ public class Proposal {
     private String language;
     private int duration;
     private int maxAttendees;
-    private int votes;
 
-
-    public Proposal(int proposalId, String title, String description, int userId, String type, String difficulty, String language, int duration, int maxAtendees, int votes) {
+    public Proposal(int proposalId, String title, String description, String type, String difficulty, String language, int duration, int maxAttendees) {
         this.proposalId = proposalId;
         this.title = title;
         this.description = description;
-        this.userId = userId;
         this.type = type;
         this.difficulty = difficulty;
         this.language = language;
         this.duration = duration;
-        this.maxAttendees = maxAtendees;
-        this.votes = votes;
+        this.maxAttendees = maxAttendees;
     }
-    
-    
 
     public int getId() {
         return proposalId;
@@ -102,14 +99,6 @@ public class Proposal {
 
     public void setmaxAtendees(int maxAtendees) {
         this.maxAttendees = maxAtendees;
-    }
-
-    public int getVotes() {
-        return votes;
-    }
-
-    public void setVotes(int votes) {
-        this.votes = votes;
     }
 
 

@@ -1,4 +1,4 @@
-package com.arobs.internship.arobs.meetups.service;
+package com.arobs.internship.arobs.meetups.service.user;
 
 import com.arobs.internship.arobs.meetups.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +12,9 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public void addUser(User user) {
+    public User addUser(User user) {
         userObject.addUser(user);
+        return user;
     }
 
     @Override

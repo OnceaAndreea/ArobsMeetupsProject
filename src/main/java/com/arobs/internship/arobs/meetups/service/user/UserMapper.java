@@ -1,4 +1,4 @@
-package com.arobs.internship.arobs.meetups.service;
+package com.arobs.internship.arobs.meetups.service.user;
 
 import ma.glasnost.orika.Mapper;
 import ma.glasnost.orika.MapperFactory;
@@ -49,3 +49,5 @@ this.applicationContext = applicationContext;
 init();
     }
 }
+
+

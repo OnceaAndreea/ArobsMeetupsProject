@@ -24,6 +24,12 @@ public class MeetupsApplication {
             }
             e.printStackTrace();
         }
+
+        StringBuilder a=new StringBuilder();
+        a.append("ana");
+        a.append(4);
+        System.out.println(a.toString());
+
     }
 
 }

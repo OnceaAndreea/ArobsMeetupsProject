@@ -12,13 +12,20 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ApiModelProperty(hidden = true)
+    @Column(name="userId")
     private int userId;
 
+    @Column(name="firstName")
     private String firstName;
+    @Column(name="lastName")
     private String lastName;
+    @Column(name="role")
     private String role;
+    @Column(name="password")
     private String password;
+    @Column(name="email")
     private String email;
+    @Column(name="points")
     private int points;
 
     public User(){

@@ -18,8 +18,8 @@ public class DataBaseConnection {
     public HikariDataSource getDs() {
         config.setDriverClassName("com.mysql.cj.jdbc.Driver");
         config.setJdbcUrl("jdbc:mysql://localhost/meetups");
-        config.setUsername("root");
-        config.setPassword("pass");
+        config.setUsername("AndreeaOncea");
+        config.setPassword("MySql1234");
         config.addDataSourceProperty("cachePrepStmts", "true");
         config.addDataSourceProperty("prepStmtCacheSize", "250");
         config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");

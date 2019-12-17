@@ -1,6 +1,11 @@
 package com.arobs.internship.arobs.meetups.entity;
 
-public class Type {
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="votes")
+public class Vote {
 
     private int userId;
     private int proposalId;

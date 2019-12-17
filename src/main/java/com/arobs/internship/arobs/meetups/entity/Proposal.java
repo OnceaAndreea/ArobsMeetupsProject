@@ -3,13 +3,10 @@ package com.arobs.internship.arobs.meetups.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-@JsonFormat
 @Entity
+@Table(name="proposals")
 public class Proposal {
 
     @Id

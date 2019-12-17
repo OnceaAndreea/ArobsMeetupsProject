@@ -2,15 +2,11 @@ package com.arobs.internship.arobs.meetups.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-@JsonFormat
 @Entity
+@Table(name="users")
 public class User {
 
     @Id
@@ -24,6 +20,10 @@ public class User {
     private String password;
     private String email;
     private int points;
+
+    public User(){
+
+    }
 
     public User(int userId, String firstName,String lastName, String password, String role, String email, int points) {
         this.userId = userId;

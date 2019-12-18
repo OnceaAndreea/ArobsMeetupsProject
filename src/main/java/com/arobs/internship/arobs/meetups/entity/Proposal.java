@@ -12,15 +12,24 @@ public class Proposal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ApiModelProperty(hidden = true)
+    @Column(name="proposalId")
     private int proposalId;
 
+    @Column(name="userId")
     private int userId;
+    @Column(name="title")
     private String title;
+    @Column(name="description")
     private String description;
+    @Column(name="type")
     private String type;
+    @Column(name="difficulty")
     private String difficulty;
+    @Column(name="language")
     private String language;
+    @Column(name="duration")
     private int duration;
+    @Column(name="maxAttendees")
     private int maxAttendees;
 
     public Proposal(int proposalId, String title, String description, String type, String difficulty, String language, int duration, int maxAttendees) {

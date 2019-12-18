@@ -1,16 +1,16 @@
 package com.arobs.internship.arobs.meetups.service.proposal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Component
 public class ProposalServiceImpl implements ProposalService {
 
     @Autowired
     ProposalObject proposalObject;
-
 
     @Override
     public void addProposal(ProposalDTO proposalDTO) {

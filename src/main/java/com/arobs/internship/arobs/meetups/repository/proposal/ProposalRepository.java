@@ -1,4 +1,4 @@
-package com.arobs.internship.arobs.meetups.repository;
+package com.arobs.internship.arobs.meetups.repository.proposal;
 
 import com.arobs.internship.arobs.meetups.configuration.DataBaseConnection;
 import com.arobs.internship.arobs.meetups.entity.Proposal;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class ProposalRepo {
+public class ProposalRepository {
 
     @Autowired
     DataBaseConnection dataBaseConnection;

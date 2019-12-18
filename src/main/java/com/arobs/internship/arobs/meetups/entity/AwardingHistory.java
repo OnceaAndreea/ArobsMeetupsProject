@@ -5,8 +5,8 @@ import io.swagger.annotations.ApiModelProperty;
 import javax.persistence.*;
 
 @Entity
-@Table(name="awards")
-public class Award {
+@Table(name="awardingHistory")
+public class AwardingHistory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,10 +14,14 @@ public class Award {
     @Column(name="awardId")
     private int awardId;
 
-    @Column(name="userId")
-    private int userID;
-    @Column(name="prizeId")
-    private int prizeId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId")
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "prizeId")
+    private Prize prize;
+
     @Column(name="pointsNumber")
     private int pointsNumber;
 

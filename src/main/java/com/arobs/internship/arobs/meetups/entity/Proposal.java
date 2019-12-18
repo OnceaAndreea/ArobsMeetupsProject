@@ -15,22 +15,32 @@ public class Proposal {
     @Column(name="proposalId")
     private int proposalId;
 
-    @Column(name="userId")
-    private int userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId")
+    private User user;
+
     @Column(name="title")
     private String title;
+
     @Column(name="description")
     private String description;
+
     @Column(name="type")
     private String type;
+
     @Column(name="difficulty")
     private String difficulty;
+
     @Column(name="language")
     private String language;
+
     @Column(name="duration")
     private int duration;
+
     @Column(name="maxAttendees")
     private int maxAttendees;
+
+
 
     public Proposal(int proposalId, String title, String description, String type, String difficulty, String language, int duration, int maxAttendees) {
         this.proposalId = proposalId;
@@ -65,14 +75,6 @@ public class Proposal {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public int getuserId() {
-        return userId;
-    }
-
-    public void setuserId(int userId) {
-        this.userId = userId;
     }
 
     public String getType() {

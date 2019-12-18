@@ -14,12 +14,17 @@ public class Attendance {
     @Column(name="attendanceId")
     private int attendanceId;
 
-    @Column(name="userId")
-    private int userId;
-    @Column(name="eventId")
-    private int eventId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId")
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "eventId")
+    private Event event;
+
     @Column(name="note")
     private int note;
+
     @Column(name="comment")
     private String comment;
 }

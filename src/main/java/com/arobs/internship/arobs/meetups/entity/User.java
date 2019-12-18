@@ -4,35 +4,81 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ApiModelProperty(hidden = true)
-    @Column(name="userId")
+    @Column(name = "userId")
     private int userId;
 
-    @Column(name="firstName")
+    @Column(name = "firstName")
     private String firstName;
-    @Column(name="lastName")
+
+    @Column(name = "lastName")
     private String lastName;
-    @Column(name="role")
+
+    @Column(name = "role")
     private String role;
-    @Column(name="password")
+
+    @Column(name = "password")
     private String password;
-    @Column(name="email")
+
+    @Column(name = "email")
     private String email;
-    @Column(name="points")
+
+    @Column(name = "points")
     private int points;
 
-    public User(){
+    //one user can make many proposals
+    @OneToMany(
+            mappedBy = "users",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Proposal> proposals = new ArrayList<>();
+
+    @OneToMany(
+            mappedBy = "users",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Vote> votes = new ArrayList<>();
+
+    //one user can register as attendee to many events
+    @OneToMany(
+            mappedBy = "users",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Attendance> registeredAttendees = new ArrayList<>();
+
+    //one user can organize and present many events
+    @OneToMany(
+            mappedBy = "users",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Event> organizedEvents = new ArrayList<>();
+
+    //one user can appear in many awarding histories
+    @OneToMany(
+            mappedBy = "users",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<AwardingHistory> awards = new ArrayList<>();
+
+    public User() {
 
     }
 
-    public User(int userId, String firstName,String lastName, String password, String role, String email, int points) {
+    public User(int userId, String firstName, String lastName, String password, String role, String email, int points) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -45,6 +91,7 @@ public class User {
     public void setUserId(int userId) {
         this.userId = userId;
     }
+
     public int getUserId() {
         return userId;
     }
@@ -93,7 +140,7 @@ public class User {
         return points;
     }
 
-    public void  setPoints(int points) {
+    public void setPoints(int points) {
         this.points = points;
     }
 

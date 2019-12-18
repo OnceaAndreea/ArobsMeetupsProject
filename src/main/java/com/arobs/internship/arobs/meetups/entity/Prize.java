@@ -3,6 +3,8 @@ package com.arobs.internship.arobs.meetups.entity;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="prize")
@@ -16,6 +18,15 @@ public class Prize {
 
     @Column(name="description")
     private String despription;
+
     @Column(name="value")
     private String value;
+
+    //one prize can be in many awarding histories
+    @OneToMany(
+            mappedBy = "prize",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<AwardingHistory> awards = new ArrayList<>();
 }

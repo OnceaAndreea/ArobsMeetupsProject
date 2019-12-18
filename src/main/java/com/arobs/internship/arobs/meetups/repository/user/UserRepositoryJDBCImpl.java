@@ -18,6 +18,7 @@ public class UserRepositoryJDBCImpl implements UserRepository {
 
     @Autowired
     DataBaseConnection dataBaseConnection;
+
     public void addUser(User user) {
 
         String sql = " Insert into users (firstName,lastName,password,role,email,points)"

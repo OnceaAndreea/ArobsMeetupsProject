@@ -1,8 +1,11 @@
 package com.arobs.internship.arobs.meetups.service.proposal;
 
 import com.arobs.internship.arobs.meetups.entity.Proposal;
+import com.arobs.internship.arobs.meetups.entity.User;
+import ma.glasnost.orika.CustomMapper;
 import ma.glasnost.orika.Mapper;
 import ma.glasnost.orika.MapperFactory;
+import ma.glasnost.orika.MappingContext;
 import ma.glasnost.orika.impl.ConfigurableMapper;
 import ma.glasnost.orika.impl.generator.specification.Convert;
 import org.springframework.beans.BeansException;
@@ -25,21 +28,22 @@ public class ProposalMapper extends ConfigurableMapper implements ApplicationCon
 
     protected void configure(MapperFactory factory) {
         this.mapperFactory = factory;
-        addAllMapperBeans(applicationContext);
 
-        mapperFactory.classMap(Proposal.class, ProposalDTO.class).byDefault().register();
+        mapperFactory.classMap(Proposal.class, ProposalDTO.class)
+                .customize(new CustomMapper<Proposal, ProposalDTO>() {
+                    @Override
+                    public void mapAtoB(Proposal proposal, ProposalDTO proposalDTO, MappingContext context) {
+                        proposalDTO.setUserId(proposal.getUser().getUserId());
+                    }
 
-    }
+                    @Override
+                    public void mapBtoA(ProposalDTO proposalDTO, Proposal proposal, MappingContext context) {
+                        User user = new User(proposalDTO.getUserId());
+                        proposal.setUser(user);
+                    }
+                })
+                .byDefault().register();
 
-    private void addAllMapperBeans(final ApplicationContext applicationContext) {
-
-        //get all existing mappers from context
-        Mapper<String, Mapper> mappers = (Mapper<String, Mapper>) applicationContext.getBeansOfType(Mapper.class);
-        mapperFactory.registerMapper(mappers);
-
-        //get all converters from context
-        Map<String, Convert> beansOfType = applicationContext.getBeansOfType(Convert.class);
-        //mapperFactory.getConverterFactory().registerConverter();
     }
 
     @Override

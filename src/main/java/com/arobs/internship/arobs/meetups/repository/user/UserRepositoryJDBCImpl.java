@@ -70,4 +70,9 @@ public class UserRepositoryJDBCImpl implements UserRepository {
         }
         return users;
     }
+
+    @Override
+    public User getUserById(int userId) {
+        return null;
+    }
 }

@@ -14,37 +14,38 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ApiModelProperty(hidden = true)
-    @Column(name = "userId")
+    @Column(name = "userId",nullable = false)
     private int userId;
 
-    @Column(name = "firstName")
+    @Column(name = "firstName",nullable = false)
     private String firstName;
 
-    @Column(name = "lastName")
+    @Column(name = "lastName",nullable = false)
     private String lastName;
 
-    @Column(name = "role")
-    private String role;
-
-    @Column(name = "password")
+    @Column(name = "password",nullable = false)
     private String password;
 
-    @Column(name = "email")
+    @Column(name = "role",nullable = false)
+    private String role;
+
+    @Column(name = "email",nullable = false)
     private String email;
 
-    @Column(name = "points")
+    @Column(name = "points",nullable=true)
     private int points;
 
     //one user can make many proposals
     @OneToMany(
-            mappedBy = "users",
+            mappedBy = "user",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
     private List<Proposal> proposals = new ArrayList<>();
 
+    //one user can give many votes(can vote many proposals)
     @OneToMany(
-            mappedBy = "users",
+            mappedBy = "user",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
@@ -52,7 +53,7 @@ public class User {
 
     //one user can register as attendee to many events
     @OneToMany(
-            mappedBy = "users",
+            mappedBy = "user",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
@@ -60,7 +61,7 @@ public class User {
 
     //one user can organize and present many events
     @OneToMany(
-            mappedBy = "users",
+            mappedBy = "user",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
@@ -68,7 +69,7 @@ public class User {
 
     //one user can appear in many awarding histories
     @OneToMany(
-            mappedBy = "users",
+            mappedBy = "user",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
@@ -76,6 +77,9 @@ public class User {
 
     public User() {
 
+    }
+    public User(int userId) {
+        this.userId = userId;
     }
 
     public User(int userId, String firstName, String lastName, String password, String role, String email, int points) {

@@ -22,7 +22,6 @@ import java.util.List;
 @Repository
 public class UserRepositoryHibernateImpl implements UserRepository {
 
-    //hibernate impl
     @Autowired
     SessionFactory sessionFactory;
 
@@ -42,5 +41,16 @@ public class UserRepositoryHibernateImpl implements UserRepository {
         criteriaQuery.select(root);
         Query query = currentSession.createQuery(criteriaQuery);
         return query.getResultList();
+    }
+
+    @Override
+    public User getUserById(int userId) {
+        Session currentSession=sessionFactory.getCurrentSession();
+        CriteriaBuilder criteriaBuilder=currentSession.getCriteriaBuilder();
+        CriteriaQuery<User> criteriaQuery = criteriaBuilder.createQuery(User.class);
+        Root<User> root = criteriaQuery.from(User.class);
+        criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("userId"), userId));
+        Query query = currentSession.createQuery(criteriaQuery);
+        return (User) query.getSingleResult();
     }
 }

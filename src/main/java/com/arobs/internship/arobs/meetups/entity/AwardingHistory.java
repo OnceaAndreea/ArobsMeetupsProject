@@ -11,8 +11,8 @@ public class AwardingHistory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ApiModelProperty(hidden = true)
-    @Column(name="awardId")
-    private int awardId;
+    @Column(name="awardingId")
+    private int awardingId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
@@ -25,5 +25,35 @@ public class AwardingHistory {
     @Column(name="pointsNumber")
     private int pointsNumber;
 
+    public int getAwardingId() {
+        return awardingId;
+    }
 
+    public void setAwardingId(int awardId) {
+        this.awardingId = awardId;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Prize getPrize() {
+        return prize;
+    }
+
+    public void setPrize(Prize prize) {
+        this.prize = prize;
+    }
+
+    public int getPointsNumber() {
+        return pointsNumber;
+    }
+
+    public void setPointsNumber(int pointsNumber) {
+        this.pointsNumber = pointsNumber;
+    }
 }

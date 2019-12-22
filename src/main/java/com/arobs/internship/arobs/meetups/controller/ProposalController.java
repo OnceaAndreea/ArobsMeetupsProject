@@ -13,14 +13,14 @@ import java.util.List;
 public class ProposalController {
 
     @Autowired
-    ProposalService proposalService;
+   private ProposalService proposalService;
 
     @PostMapping
     public void create(@RequestBody ProposalDTO proposalDTO){
         proposalService.addProposal(proposalDTO);
     }
 
-    @GetMapping("/Show_all_positions")
+    @GetMapping(value="/id/{userId}")
     public List<ProposalDTO> getAllPositions(@PathVariable int userId){
        return proposalService.getAllProposals(userId);
     }

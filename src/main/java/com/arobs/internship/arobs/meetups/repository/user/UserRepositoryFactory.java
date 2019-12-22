@@ -14,9 +14,9 @@ public class UserRepositoryFactory {
 
     public UserRepository createUserRepository(String type){
         if(type.equals(UserRepositoryConstants.JDBC_REPOSITORY_TYPE)){
-            return new UserRepositoryJDBCImpl();
+            return userRepositoryJDBC;
         }else if(type.equals(UserRepositoryConstants.HIBERNATE_REPOSITORY_TYPE)){
-            return new UserRepositoryHibernateImpl();
+            return  userRepositoryHibernate;
         }
         return null;
     }

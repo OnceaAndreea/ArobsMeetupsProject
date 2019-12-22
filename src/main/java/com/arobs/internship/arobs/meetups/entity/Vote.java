@@ -1,31 +1,41 @@
 package com.arobs.internship.arobs.meetups.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import io.swagger.annotations.ApiModelProperty;
+
+import javax.persistence.*;
 
 @Entity
-@Table(name="votes")
+@Table(name="votes", uniqueConstraints = {
+        @UniqueConstraint(columnNames={"userId", "proposalId"})})
 public class Vote {
 
-    @Column(name="userId")
-    private int userId;
-    @Column(name="proposalId")
-    private int proposalId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(hidden = true)
+    @Column(name = "voteId")
+    private int voteId;
 
-    public int getUserId() {
-        return userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId")
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "proposalId")
+    private Proposal proposal;
+
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public int getProposalId() {
-        return proposalId;
+    public Proposal getProposal() {
+        return proposal;
     }
 
-    public void setProposalId(int proposalId) {
-        this.proposalId = proposalId;
+    public void setProposal(Proposal proposal) {
+        this.proposal = proposal;
     }
 }

@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="proposals")
@@ -12,35 +14,53 @@ public class Proposal {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ApiModelProperty(hidden = true)
-    @Column(name="proposalId")
+    @Column(name="proposalId",nullable =false)
     private int proposalId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "userId",nullable =false)
     private User user;
 
-    @Column(name="title")
+    //one proposal can have many votes
+    @OneToMany(
+            mappedBy = "proposal",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Vote> votes = new ArrayList<>();
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    @Column(name="title",nullable = false)
     private String title;
 
-    @Column(name="description")
+    @Column(name="description",nullable = false)
     private String description;
 
-    @Column(name="type")
+    @Column(name="type",nullable = false)
     private String type;
 
-    @Column(name="difficulty")
+    @Column(name="difficulty",nullable = false)
     private String difficulty;
 
-    @Column(name="language")
+    @Column(name="language",nullable = false)
     private String language;
 
-    @Column(name="duration")
+    @Column(name="duration",nullable = false)
     private int duration;
 
-    @Column(name="maxAttendees")
+    @Column(name="maxAttendees",nullable = false)
     private int maxAttendees;
 
 
+    public Proposal() {
+    }
 
     public Proposal(int proposalId, String title, String description, String type, String difficulty, String language, int duration, int maxAttendees) {
         this.proposalId = proposalId;
@@ -109,13 +129,12 @@ public class Proposal {
         this.duration = duration;
     }
 
-    public int getmaxAtendees() {
+    public int getMaxAttendees() {
         return maxAttendees;
     }
 
-    public void setmaxAtendees(int maxAtendees) {
-        this.maxAttendees = maxAtendees;
+    public void setMaxAttendees(int maxAttendees) {
+        this.maxAttendees = maxAttendees;
     }
-
 
 }

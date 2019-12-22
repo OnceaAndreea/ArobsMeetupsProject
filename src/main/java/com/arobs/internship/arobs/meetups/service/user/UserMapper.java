@@ -25,22 +25,22 @@ public class UserMapper extends ConfigurableMapper implements ApplicationContext
 
     protected void configure(MapperFactory factory) {
         this.mapperFactory = factory;
-        addAllMapperBeans(applicationContext);
+       // addAllMapperBeans(applicationContext);
 
         mapperFactory.classMap(User.class, UserDTO.class).byDefault().register();
 
     }
 
-    private void addAllMapperBeans(final ApplicationContext applicationContext) {
-
-        //get all existing mappers from context
-        Mapper<String, Mapper> mappers = (Mapper<String, Mapper>) applicationContext.getBeansOfType(Mapper.class);
-        mapperFactory.registerMapper(mappers);
-
-        //get all converters from context
-        Map<String, Convert> beansOfType = applicationContext.getBeansOfType(Convert.class);
-         //mapperFactory.getConverterFactory().registerConverter();
-    }
+//    private void addAllMapperBeans(final ApplicationContext applicationContext) {
+//
+//        //get all existing mappers from context
+//        Mapper<String, Mapper> mappers = (Mapper<String, Mapper>) applicationContext.getBeansOfType(Mapper.class);
+//        mapperFactory.registerMapper(mappers);
+//
+//        //get all converters from context
+//        Map<String, Convert> beansOfType = applicationContext.getBeansOfType(Convert.class);
+//         //mapperFactory.getConverterFactory().registerConverter();
+//    }
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {

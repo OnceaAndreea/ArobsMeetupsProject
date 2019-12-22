@@ -5,7 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import javax.persistence.*;
 
 @Entity
-@Table(name="events")
+@Table(name="attendance")
 public class Attendance {
 
     @Id
@@ -27,4 +27,47 @@ public class Attendance {
 
     @Column(name="comment")
     private String comment;
+
+    public Attendance() {
+    }
+
+    public int getAttendanceId() {
+        return attendanceId;
+    }
+
+    public void setAttendanceId(int attendanceId) {
+        this.attendanceId = attendanceId;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+
+    public int getNote() {
+        return note;
+    }
+
+    public void setNote(int note) {
+        this.note = note;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
 }

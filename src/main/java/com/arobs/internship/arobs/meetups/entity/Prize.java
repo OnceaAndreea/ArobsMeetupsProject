@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="prize")
+@Table(name="prizes")
 public class Prize {
 
     @Id
@@ -22,7 +22,7 @@ public class Prize {
     @Column(name="value")
     private String value;
 
-    //one prize can be in many awarding histories
+    //one prize can appear in many awarding histories
     @OneToMany(
             mappedBy = "prize",
             cascade = CascadeType.ALL,

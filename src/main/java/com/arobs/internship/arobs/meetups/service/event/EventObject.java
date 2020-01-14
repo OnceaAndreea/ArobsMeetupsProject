@@ -16,6 +16,11 @@ import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @Component
 public class EventObject {
 
@@ -37,7 +42,7 @@ public class EventObject {
             ProposalRepository proposalRepository = proposalRepositoryFactory.createProposalRepository(ProposalRepositoryConstants.HIBERNATE_REPOSITORY_TYPE);
             Proposal proposal = proposalRepository.getProposalById(eventDTO.getProposalId());
 
-            Event event=eventMapper.map(eventDTO, Event.class);
+            Event event = eventMapper.map(eventDTO, Event.class);
             eventRepository.addEvent(event);
             proposalRepository.deleteProposal(proposal);
 
@@ -46,6 +51,26 @@ public class EventObject {
         }
     }
 
+    public void updateEvent(int eventId, String date, String room, int maxAttendees) {
+
+        Event event = eventRepository.getEventById(eventId);
+
+        if (event != null) {
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date dt = null;
+            try {
+                dt = df.parse(date);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            event.setEventDate(dt);
+            event.setRoom(room);
+            event.setMaxAttendees(maxAttendees);
+
+        } else
+            logger.log(Level.INFO, "Event with id " + event.getEventId() + " doesn't exist");
+    }
 }
 
 

@@ -9,4 +9,5 @@ public interface EventRepository {
     void addEvent(Event event);
 
     public Event getEventById(int eventId);
+
 }

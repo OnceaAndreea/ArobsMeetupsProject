@@ -1,6 +1,7 @@
 package com.arobs.internship.arobs.meetups.entity;
 
 import io.swagger.annotations.ApiModelProperty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -45,6 +46,7 @@ public class Event {
     @Column(name = "room", nullable = false)
     private String room;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "eventDate", nullable = false)
     private Date eventDate;
 

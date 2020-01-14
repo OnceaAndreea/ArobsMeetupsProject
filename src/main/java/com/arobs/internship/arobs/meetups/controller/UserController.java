@@ -20,34 +20,34 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public void create(@RequestBody UserDTO userDTO){
+    public void create(@RequestBody UserDTO userDTO) {
         userService.addUser(userDTO);
     }
 
     @ApiOperation(value = "Show all users")
     @GetMapping("/Show_all_users")
-    public List<UserDTO> getAllUsers(){
+    public List<UserDTO> getAllUsers() {
         return userService.getAllUsers();
     }
 
-    @GetMapping(value="/userId/{userId}")
+    @GetMapping(value = "/userId/{userId}")
     public UserDTO getUserById(@PathVariable int userId) {
         return userService.getUserById(userId);
     }
 
     @GetMapping("/show_Leaderboard")
-    public List<UserDTO> showLeaderBoard(){
+    public List<UserDTO> showLeaderBoard() {
         return userService.showLeaderBoard();
     }
 
     @DeleteMapping("/userId/{userId}")
-    public void deleteUserById(@PathVariable int userId){
+    public void deleteUserById(@PathVariable int userId) {
         userService.deleteUserById(userId);
     }
 
     @PutMapping("/userId/{userId}/lastName/{lastName}/password/{password}/email/{email}")
-    public void updateUser(@PathVariable int userId,@PathVariable String lastName,@PathVariable String password,@PathVariable String email){
-        userService.updateUser(userId,lastName,password,email);
+    public void updateUser(@PathVariable int userId, @PathVariable String lastName, @PathVariable String password, @PathVariable String email) {
+        userService.updateUser(userId, lastName, password, email);
     }
 
 }

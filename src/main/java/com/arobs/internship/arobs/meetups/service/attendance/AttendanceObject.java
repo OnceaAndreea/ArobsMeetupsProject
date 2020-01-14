@@ -51,14 +51,17 @@ public class AttendanceObject {
 
         Attendance attendance = attendanceRepository.getAttendanceById(attendanceId);
 
-        if (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(attendance.getEvent().getEventDate().toString()).before(new Date()))
-            if (note >= 1 && note <= 5) {
-                attendance.setNote(note);
-                attendance.setComment(comment);
-                attendance.getUser().addPoints(2);
-            } else
-                logger.log(Level.INFO, "Note should be beetween 1 and 5!");
+        if (attendance != null)
+            if (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(attendance.getEvent().getEventDate().toString()).before(new Date()))
+                if (note >= 1 && note <= 5) {
+                    attendance.setNote(note);
+                    attendance.setComment(comment);
+                    attendance.getUser().addPoints(2);
+                } else
+                    logger.log(Level.INFO, "Note should be beetween 1 and 5!");
+            else
+                logger.log(Level.INFO, "This event has not happened yet");
         else
-            logger.log(Level.INFO, "this event has not happened yet");
+            logger.log(Level.INFO, "Attendance with id " + attendance.getAttendanceId() + " doesn't exist");
     }
 }

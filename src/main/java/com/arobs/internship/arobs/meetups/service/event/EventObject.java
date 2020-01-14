@@ -14,12 +14,15 @@ import com.arobs.internship.arobs.meetups.service.vote.VoteObject;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Component
 public class EventObject {
@@ -51,25 +54,44 @@ public class EventObject {
         }
     }
 
-    public void updateEvent(int eventId, String date, String room, int maxAttendees) {
+    public void updateEvent(int eventId, String date, String room, int maxAttendees,String difficulty) {
 
         Event event = eventRepository.getEventById(eventId);
 
         if (event != null) {
-            DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Date dt = null;
-            try {
-                dt = df.parse(date);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
 
-            event.setEventDate(dt);
+            event.setEventDate(date);
             event.setRoom(room);
             event.setMaxAttendees(maxAttendees);
+            event.setDifficulty(difficulty);
 
         } else
             logger.log(Level.INFO, "Event with id " + event.getEventId() + " doesn't exist");
+    }
+
+    public List<EventDTO> getAllEvents(){
+
+        List<Event> events=eventRepository.getAllEvents();
+        return eventMapper.mapAsList(events,EventDTO.class);
+    }
+
+    @Scheduled(fixedRate = 5*60*1000)
+    @Async
+    public void verifyEventDate() {
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        List<Event> events = eventRepository.getAllEvents();
+        for (Event event : events) {
+            try {
+                if (dateFormat.parse(event.getEventDate()).before(new Date())) {
+
+                    event.awardEventOrganizer();
+                    event.awardEventAttendees();
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
 

@@ -52,7 +52,7 @@ public class AttendanceObject {
         Attendance attendance = attendanceRepository.getAttendanceById(attendanceId);
 
         if (attendance != null)
-            if (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(attendance.getEvent().getEventDate().toString()).before(new Date()))
+            if (new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(attendance.getEvent().getEventDate()).before(new Date()))
                 if (note >= 1 && note <= 5) {
                     attendance.setNote(note);
                     attendance.setComment(comment);

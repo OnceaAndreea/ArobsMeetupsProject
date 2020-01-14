@@ -20,6 +20,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @Component
 public class EventMapper extends ConfigurableMapper implements ApplicationContextAware {
 
@@ -60,6 +65,7 @@ public class EventMapper extends ConfigurableMapper implements ApplicationContex
                             event.setLanguage(proposal.getLanguage());
                             event.setDuration(proposal.getDuration());
                             event.setMaxAttendees(proposal.getMaxAttendees());
+
                         } else
                             logger.log(Level.INFO, "Proposal with id " + proposal.getProposalId() + "doesn't exist");
                     }

@@ -12,6 +12,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.Date;
+import java.util.List;
 
 @Repository
 public class EventRepositoryImpl implements EventRepository {
@@ -35,6 +36,17 @@ public class EventRepositoryImpl implements EventRepository {
         criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("eventId"), eventId));
         Query query = currentSession.createQuery(criteriaQuery);
         return (Event) query.getSingleResult();
+    }
+
+    @Override
+    public List<Event> getAllEvents() {
+        Session currentSession = sessionFactory.getCurrentSession();
+        CriteriaBuilder criteriaBuilder = currentSession.getCriteriaBuilder();
+        CriteriaQuery<Event> criteriaQuery = criteriaBuilder.createQuery(Event.class);
+        Root<Event> root = criteriaQuery.from(Event.class);
+        criteriaQuery.select(root);
+        Query query = currentSession.createQuery(criteriaQuery);
+        return query.getResultList();
     }
 
 

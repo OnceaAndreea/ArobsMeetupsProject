@@ -152,6 +152,10 @@ public class User implements Comparable<User> {
         this.points=this.points+numberOfPoints;
     }
 
+    public void resetPoints(){
+        this.setPoints(0);
+    }
+
     @Override
     public int compareTo(User user) {
         return user.getPoints()-this.getPoints();

@@ -46,9 +46,8 @@ public class Event {
     @Column(name = "room", nullable = false)
     private String room;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "eventDate", nullable = false)
-    private Date eventDate;
+    private String eventDate;
 
     //one event can have many attendees
     @OneToMany(
@@ -146,11 +145,11 @@ public class Event {
         this.room = room;
     }
 
-    public Date getEventDate() {
+    public String getEventDate() {
         return eventDate;
     }
 
-    public void setEventDate(Date eventDate) {
+    public void setEventDate(String eventDate) {
         this.eventDate = eventDate;
     }
 
@@ -167,6 +166,22 @@ public class Event {
         return "Event with eventId:" + this.getEventId() + ",userId:" + this.getUser().getUserId() + ",title:" + this.getTitle() +
                 ",description:" + this.getDescription() + ",type:" + this.getType() + ",difficulty:" + this.getDifficulty() + ",language:"
                 + this.getLanguage() + ",duration:" + this.getDuration() + ",maxAttendees:" + this.getMaxAttendees() + ",room:" + this.getRoom() + ",eventDate:" + this.getEventDate();
+    }
+
+    public void awardEventOrganizer() {
+        if (this.getDifficulty() == "Easy")
+            this.getUser().addPoints(20);
+        else if (this.getDifficulty() == "Medium")
+            this.getUser().addPoints(35);
+        else if (this.getDifficulty() == "High")
+            this.getUser().addPoints(50);
+    }
+
+    public void awardEventAttendees() {
+        List<Attendance> eventAttendees = this.getEventAttendees();
+        for (int i = 0; i < eventAttendees.size(); i++) {
+            eventAttendees.get(i).getUser().addPoints(5);
+        }
     }
 
 

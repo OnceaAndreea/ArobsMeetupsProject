@@ -6,7 +6,7 @@ public class EventDTO {
 
     private int proposalId;
     private String room;
-    private Date eventDate;
+    private String eventDate;
 
     public int getProposalId() {
         return proposalId;
@@ -24,11 +24,11 @@ public class EventDTO {
         this.room = room;
     }
 
-    public Date getEventDate() {
+    public String getEventDate() {
         return eventDate;
     }
 
-    public void setEventDate(Date eventDate) {
+    public void setEventDate(String eventDate) {
         this.eventDate = eventDate;
     }
 }

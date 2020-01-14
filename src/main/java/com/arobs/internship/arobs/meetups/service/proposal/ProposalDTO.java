@@ -2,14 +2,12 @@ package com.arobs.internship.arobs.meetups.service.proposal;
 
 public class ProposalDTO {
 
-
     private int userId;
     private String title;
     private String description;
     private String type;
     private String difficulty;
     private String language;
-    private int votes;
     private int duration;
     private int maxAttendees;
 
@@ -61,14 +59,6 @@ public class ProposalDTO {
         this.language = language;
     }
 
-    public int getVotes() {
-        return votes;
-    }
-
-    public void setVotes(int votes) {
-        this.votes = votes;
-    }
-
     public int getDuration() {
         return duration;
     }
@@ -84,4 +74,5 @@ public class ProposalDTO {
     public void setMaxAttendees(int maxAttendees) {
         this.maxAttendees = maxAttendees;
     }
+
 }

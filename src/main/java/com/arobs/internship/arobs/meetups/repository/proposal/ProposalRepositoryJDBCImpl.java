@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Repository
@@ -44,7 +45,7 @@ public class ProposalRepositoryJDBCImpl implements ProposalRepository {
     }
 
     @Override
-    public List<Proposal> getAllProposals(int userId) {
+    public List<Proposal> getAllProposalsOfUser(int userId) {
 
         List<Proposal> proposals = new ArrayList<>();
 
@@ -76,4 +77,21 @@ public class ProposalRepositoryJDBCImpl implements ProposalRepository {
         }
         return proposals;
     }
+
+    @Override
+    public Proposal getProposalById(int proposalId) {
+        return null;
+    }
+
+    @Override
+    public void deleteProposal(Proposal proposal) {
+
+    }
+
+    @Override
+    public List<Proposal> getAllProposals() {
+        return null;
+    }
+
+
 }

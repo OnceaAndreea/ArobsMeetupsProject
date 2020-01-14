@@ -13,15 +13,47 @@ import java.util.List;
 public class ProposalController {
 
     @Autowired
-   private ProposalService proposalService;
+    private ProposalService proposalService;
 
     @PostMapping
-    public void create(@RequestBody ProposalDTO proposalDTO){
+    public void create(@RequestBody ProposalDTO proposalDTO) {
         proposalService.addProposal(proposalDTO);
     }
 
-    @GetMapping(value="/id/{userId}")
-    public List<ProposalDTO> getAllPositions(@PathVariable int userId){
-       return proposalService.getAllProposals(userId);
+    @GetMapping(value = "/id/{userId}")
+    public List<ProposalDTO> getAllProposalsOfUser(@PathVariable int userId) {
+        return proposalService.getAllProposalsOfUser(userId);
     }
+
+    @GetMapping(value = "/proposalId/{proposalId}")
+    public ProposalDTO getProposalById(@PathVariable int proposalId) {
+        return proposalService.getProposalById(proposalId);
+    }
+
+    @GetMapping("/getAllProposals")
+    public List<ProposalDTO> getAllProposals() {
+        return proposalService.getAllProposals();
+    }
+
+    @GetMapping("/getTopFiveMostVotedProposals")
+    public List<ProposalDTO> getTopFiveMostVotedProposals() {
+        return proposalService.getTopFiveMostVotedProposals();
+    }
+
+    @DeleteMapping("/proposalId/{proposalId}")
+    public void deleteProposalById(@PathVariable int proposalId) {
+        proposalService.deleteProposalById(proposalId);
+    }
+
+    @DeleteMapping("/userId/{userId}")
+    public void deleteAllProposalsOfUser(@PathVariable int userId) {
+        proposalService.deleteAllProposals(userId);
+    }
+
+    @PutMapping("/proposalId{proposalId}/title{title}/description{description}/language{language}/duration{duration}/difficulty{difficulty}/maxAttendees{maxAttendees}")
+    public void updateProposal(@PathVariable int proposalId,@PathVariable String title, @PathVariable String description,@PathVariable String language,@PathVariable int duration,@PathVariable String difficulty,@PathVariable int maxAttendees) {
+        proposalService.updateProposal(proposalId,title,description,language,duration,difficulty,maxAttendees);
+    }
+
+
 }

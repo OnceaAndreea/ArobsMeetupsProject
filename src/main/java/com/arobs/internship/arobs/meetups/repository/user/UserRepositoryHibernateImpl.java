@@ -25,7 +25,6 @@ public class UserRepositoryHibernateImpl implements UserRepository {
     @Autowired
     SessionFactory sessionFactory;
 
-
     @Override
     public void addUser(User user) {
         Session currentSession = sessionFactory.getCurrentSession();
@@ -53,4 +52,12 @@ public class UserRepositoryHibernateImpl implements UserRepository {
         Query query = currentSession.createQuery(criteriaQuery);
         return (User) query.getSingleResult();
     }
+
+    @Override
+    public void deleteUser(User user) {
+        Session currentSession=sessionFactory.getCurrentSession();
+        currentSession.delete(user);
+
+    }
+
 }

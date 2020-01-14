@@ -148,5 +148,8 @@ public class User {
         this.points = points;
     }
 
+    public void addPoints(int numberOfPoints){
+        this.points=this.points+numberOfPoints;
+    }
 
 }

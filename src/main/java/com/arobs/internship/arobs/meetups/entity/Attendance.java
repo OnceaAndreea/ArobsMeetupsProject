@@ -5,27 +5,27 @@ import io.swagger.annotations.ApiModelProperty;
 import javax.persistence.*;
 
 @Entity
-@Table(name="attendance")
+@Table(name = "attendance")
 public class Attendance {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ApiModelProperty(hidden = true)
-    @Column(name="attendanceId")
+    @Column(name = "attendanceId")
     private int attendanceId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "userId", nullable = false)
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "eventId")
+    @JoinColumn(name = "eventId", nullable = false)
     private Event event;
 
-    @Column(name="note")
+    @Column(name = "note")
     private int note;
 
-    @Column(name="comment")
+    @Column(name = "comment")
     private String comment;
 
     public Attendance() {
@@ -69,5 +69,10 @@ public class Attendance {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    @Override
+    public String toString() {
+        return "Attendance with id:" + this.getAttendanceId() + ",userId:" + this.getUser().getUserId() + ",eventId:" + this.getEvent().getEventId();
     }
 }

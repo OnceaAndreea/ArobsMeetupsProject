@@ -31,4 +31,16 @@ public class UserServiceImpl implements UserService {
     public UserDTO getUserById(int userId) {
        return userObject.getUserById(userId);
     }
+
+    @Override
+    @Transactional
+    public void deleteUserById(int userId) {
+        userObject.deleteUserById(userId);
+    }
+
+    @Override
+    @Transactional
+    public void updateUser(int userId,String lastName,String password,String email) {
+    userObject.updateUser(userId,lastName,password,email);
+    }
 }

@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -18,8 +19,12 @@ public interface ProposalRepository {
 
     void addProposal(Proposal proposal);
 
-    List<Proposal> getAllProposals(int userId);
+    List<Proposal> getAllProposalsOfUser(int userId);
 
+    Proposal getProposalById(int proposalId);
 
+    void deleteProposal(Proposal proposal);
+
+    List<Proposal> getAllProposals();
 }
 

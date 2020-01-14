@@ -20,30 +20,50 @@ public class UserObject {
     UserMapper userMapper;
 
     //receive DTO
-    public void addUser(UserDTO userDTO){
+    public void addUser(UserDTO userDTO) {
         UserRepository userRepository = userRepositoryFactory.createUserRepository(UserRepositoryConstants.HIBERNATE_REPOSITORY_TYPE);
-        if (userDTO!=null){
+        if (userDTO != null) {
             User user = userMapper.map(userDTO, User.class);
             userRepository.addUser(user);
         }
     }
 
     //send DTOs
-    public List<UserDTO> getAllUsers(){
+    public List<UserDTO> getAllUsers() {
         UserRepository userRepository = userRepositoryFactory.createUserRepository(UserRepositoryConstants.HIBERNATE_REPOSITORY_TYPE);
-        List<User>users= userRepository.getAllUsers();
-        if (users!=null){
+        List<User> users = userRepository.getAllUsers();
+        if (users != null) {
             return userMapper.mapAsList(users, UserDTO.class);
         }
         return null;
     }
 
-    public UserDTO getUserById(int userId){
+    public UserDTO getUserById(int userId) {
         UserRepository userRepository = userRepositoryFactory.createUserRepository(UserRepositoryConstants.HIBERNATE_REPOSITORY_TYPE);
-        User user=userRepository.getUserById(userId);
-         if(user!=null){
-             return userMapper.map(user,UserDTO.class);
+        User user = userRepository.getUserById(userId);
+        if (user != null) {
+            return userMapper.map(user, UserDTO.class);
+        }
+        return null;
     }
-             return null;
-}
+
+    public void deleteUserById(int userId) {
+        UserRepository userRepository = userRepositoryFactory.createUserRepository(UserRepositoryConstants.HIBERNATE_REPOSITORY_TYPE);
+        User user = userRepository.getUserById(userId);
+        if (user!=null){
+            userRepository.deleteUser(user);
+        }
+    }
+    public void updateUser(int userId,String lastName,String password,String email){
+        UserRepository userRepository = userRepositoryFactory.createUserRepository(UserRepositoryConstants.HIBERNATE_REPOSITORY_TYPE);
+        User user = userRepository.getUserById(userId);
+        if(user!=null){
+            user.setLastName(lastName);
+            user.setPassword(password);
+            user.setEmail(email);
+            userRepository.addUser(user);
+        }
+    }
+
+
 }

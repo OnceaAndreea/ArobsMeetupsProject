@@ -75,4 +75,9 @@ public class UserRepositoryJDBCImpl implements UserRepository {
     public User getUserById(int userId) {
         return null;
     }
+
+    @Override
+    public void deleteUser(User user) {
+
+    }
 }

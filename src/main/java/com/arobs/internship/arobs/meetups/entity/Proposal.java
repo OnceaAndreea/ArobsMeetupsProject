@@ -8,17 +8,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name="proposals")
-public class Proposal {
+@Table(name = "proposals")
+public class Proposal implements Comparable<Proposal> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @ApiModelProperty(hidden = true)
-    @Column(name="proposalId",nullable =false)
+    @Column(name = "proposalId", nullable = false)
     private int proposalId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId",nullable =false)
+    @JoinColumn(name = "userId", nullable = false)
     private User user;
 
     //one proposal can have many votes
@@ -29,6 +29,18 @@ public class Proposal {
     )
     private List<Vote> votes = new ArrayList<>();
 
+    public List<Vote> getVotes() {
+        return votes;
+    }
+
+    public void setVotes(List<Vote> votes) {
+        this.votes = votes;
+    }
+
+    public Proposal(int proposalId) {
+        this.proposalId = proposalId;
+    }
+
     public User getUser() {
         return user;
     }
@@ -37,27 +49,26 @@ public class Proposal {
         this.user = user;
     }
 
-    @Column(name="title",nullable = false)
+    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name="description",nullable = false)
+    @Column(name = "description", nullable = false)
     private String description;
 
-    @Column(name="type",nullable = false)
+    @Column(name = "type", nullable = false)
     private String type;
 
-    @Column(name="difficulty",nullable = false)
+    @Column(name = "difficulty", nullable = false)
     private String difficulty;
 
-    @Column(name="language",nullable = false)
+    @Column(name = "language", nullable = false)
     private String language;
 
-    @Column(name="duration",nullable = false)
+    @Column(name = "duration", nullable = false)
     private int duration;
 
-    @Column(name="maxAttendees",nullable = false)
+    @Column(name = "maxAttendees", nullable = false)
     private int maxAttendees;
-
 
     public Proposal() {
     }
@@ -73,11 +84,11 @@ public class Proposal {
         this.maxAttendees = maxAttendees;
     }
 
-    public int getId() {
+    public int getProposalId() {
         return proposalId;
     }
 
-    public void setId(int proposalId) {
+    public void setProposalId(int proposalId) {
         this.proposalId = proposalId;
     }
 
@@ -137,4 +148,12 @@ public class Proposal {
         this.maxAttendees = maxAttendees;
     }
 
+    public void addVote(Vote vote) {
+        this.votes.add(vote);
+    }
+
+    @Override
+    public int compareTo(Proposal proposal) {
+        return proposal.getVotes().size() - this.getVotes().size();
+    }
 }

@@ -35,6 +35,11 @@ public class UserController {
         return userService.getUserById(userId);
     }
 
+    @GetMapping("/show_Leaderboard")
+    public List<UserDTO> showLeaderBoard(){
+        return userService.showLeaderBoard();
+    }
+
     @DeleteMapping("/userId/{userId}")
     public void deleteUserById(@PathVariable int userId){
         userService.deleteUserById(userId);

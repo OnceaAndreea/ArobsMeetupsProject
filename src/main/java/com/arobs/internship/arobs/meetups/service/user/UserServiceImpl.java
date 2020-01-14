@@ -13,7 +13,6 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserObject userObject;
 
-
     @Override
     @Transactional
     public void addUser(UserDTO userDTO) {
@@ -42,5 +41,11 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void updateUser(int userId,String lastName,String password,String email) {
     userObject.updateUser(userId,lastName,password,email);
+    }
+
+    @Override
+    @Transactional
+    public List<UserDTO> showLeaderBoard() {
+        return userObject.showLeaderboard();
     }
 }

@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements Comparable<User> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -152,4 +152,8 @@ public class User {
         this.points=this.points+numberOfPoints;
     }
 
+    @Override
+    public int compareTo(User user) {
+        return user.getPoints()-this.getPoints();
+    }
 }

@@ -7,6 +7,7 @@ import com.arobs.internship.arobs.meetups.repository.user.UserRepositoryFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
 import java.util.List;
 
 @Component
@@ -50,19 +51,31 @@ public class UserObject {
     public void deleteUserById(int userId) {
         UserRepository userRepository = userRepositoryFactory.createUserRepository(UserRepositoryConstants.HIBERNATE_REPOSITORY_TYPE);
         User user = userRepository.getUserById(userId);
-        if (user!=null){
+        if (user != null) {
             userRepository.deleteUser(user);
         }
     }
-    public void updateUser(int userId,String lastName,String password,String email){
+
+    public void updateUser(int userId, String lastName, String password, String email) {
         UserRepository userRepository = userRepositoryFactory.createUserRepository(UserRepositoryConstants.HIBERNATE_REPOSITORY_TYPE);
         User user = userRepository.getUserById(userId);
-        if(user!=null){
+        if (user != null) {
             user.setLastName(lastName);
             user.setPassword(password);
             user.setEmail(email);
             userRepository.addUser(user);
         }
+    }
+
+    public List<UserDTO> showLeaderboard() {
+
+        UserRepository userRepository = userRepositoryFactory.createUserRepository(UserRepositoryConstants.HIBERNATE_REPOSITORY_TYPE);
+        List<User> users = userRepository.getAllUsers();
+
+        if (users != null)
+            Collections.sort(users);
+
+        return userMapper.mapAsList(users, UserDTO.class);
     }
 
 

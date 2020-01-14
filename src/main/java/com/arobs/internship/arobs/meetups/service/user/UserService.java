@@ -17,4 +17,6 @@ public interface UserService {
     public void deleteUserById(int userId);
 
     public void updateUser(int userId,String lastName,String password,String email);
+
+    public List<UserDTO> showLeaderBoard();
 }

@@ -60,7 +60,7 @@ public class AttendanceObject {
                 } else
                     logger.log(Level.INFO, "Note should be beetween 1 and 5!");
             else
-                logger.log(Level.INFO, "This event has not happened yet");
+                logger.log(Level.INFO, "Can't give feedback! This event has not happened yet!");
         else
             logger.log(Level.INFO, "Attendance with id " + attendance.getAttendanceId() + " doesn't exist");
     }

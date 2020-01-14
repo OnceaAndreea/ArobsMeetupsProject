@@ -55,6 +55,7 @@ public class AttendanceObject {
             if (note >= 1 && note <= 5) {
                 attendance.setNote(note);
                 attendance.setComment(comment);
+                attendance.getUser().addPoints(2);
             } else
                 logger.log(Level.INFO, "Note should be beetween 1 and 5!");
         else

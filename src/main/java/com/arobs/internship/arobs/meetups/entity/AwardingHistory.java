@@ -25,6 +25,12 @@ public class AwardingHistory {
     @Column(name="pointsNumber")
     private int pointsNumber;
 
+    public AwardingHistory(User user, Prize prize, int pointsNumber) {
+        this.user = user;
+        this.prize = prize;
+        this.pointsNumber = pointsNumber;
+    }
+
     public int getAwardingId() {
         return awardingId;
     }

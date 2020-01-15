@@ -35,6 +35,17 @@ public class User implements Comparable<User> {
     @Column(name = "points",nullable=true)
     private int points;
 
+    @Column(name = "isAwarded",nullable = false)
+    private boolean isAwarded;
+
+    public boolean isAwarded() {
+        return isAwarded;
+    }
+
+    public void setAwarded(boolean awarded) {
+        isAwarded = awarded;
+    }
+
     //one user can make many proposals
     @OneToMany(
             mappedBy = "user",

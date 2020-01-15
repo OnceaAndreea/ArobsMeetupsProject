@@ -15,8 +15,10 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -25,6 +27,7 @@ import java.util.Date;
 import java.util.List;
 
 @Component
+@EnableAsync
 public class EventObject {
 
     private static org.apache.logging.log4j.Logger logger = LogManager.getLogger(VoteObject.class);
@@ -75,7 +78,8 @@ public class EventObject {
         return eventMapper.mapAsList(events,EventDTO.class);
     }
 
-    @Scheduled(fixedRate = 5*60*1000)
+    @Transactional
+    @Scheduled(fixedRate = 2*60*1000)
     @Async
     public void verifyEventDate() {
 
@@ -83,10 +87,12 @@ public class EventObject {
         List<Event> events = eventRepository.getAllEvents();
         for (Event event : events) {
             try {
-                if (dateFormat.parse(event.getEventDate()).before(new Date())) {
+                if (dateFormat.parse(event.getEventDate()).before(new Date()) && event.isClosed()!=true && event.getUser().isAwarded()!=true ) {
 
                     event.awardEventOrganizer();
                     event.awardEventAttendees();
+                    event.setClosed(true);
+                    event.getUser().setAwarded(true);
                 }
             } catch (ParseException e) {
                 e.printStackTrace();

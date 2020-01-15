@@ -29,4 +29,12 @@ public class Prize {
             orphanRemoval = true
     )
     private List<AwardingHistory> awards = new ArrayList<>();
+
+    public Prize(String despription, String value) {
+        this.despription = despription;
+        this.value = value;
+    }
+
+    public Prize() {
+    }
 }

@@ -49,6 +49,10 @@ public class Event {
     @Column(name = "eventDate", nullable = false)
     private String eventDate;
 
+    @Column(name = "isClosed", nullable = false)
+    private boolean isClosed;
+
+
     //one event can have many attendees
     @OneToMany(
             mappedBy = "event",
@@ -159,6 +163,14 @@ public class Event {
 
     public void setEventAttendees(List<Attendance> eventAttendees) {
         this.eventAttendees = eventAttendees;
+    }
+
+    public boolean isClosed() {
+        return isClosed;
+    }
+
+    public void setClosed(boolean closed) {
+        isClosed = closed;
     }
 
     @Override

@@ -7,6 +7,7 @@ import com.arobs.internship.arobs.meetups.repository.event.EventRepository;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Component;
 
 import java.text.ParseException;
@@ -14,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Component
+
 public class AttendanceObject {
 
     private static org.apache.logging.log4j.Logger logger = LogManager.getLogger(Attendance.class);
